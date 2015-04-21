@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Hot Water!</title>
+
+    <!-- jQuery and jQuery Mobile -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- Code for socket.io -->
+    <script>
+    var socket = io.connect();
+    
+    socket.on('gableSolarTemp', function (data) {
+        $('#gableSolarTemp').val(data);
+    });
+    
+    socket.on('mainTankLowerTemp', function (data) {
+        $('#mainTankLowerTemp').val(data);
+    });
+    
+    socket.on('mainTankUpperTemp', function (data) {
+        $('#mainTankUpperTemp').val(data);
+    });
+    
+    socket.on('backBoilerTemp', function (data) {
+        $('#backBoilerTemp').val(data);
+    });
+    
+    socket.on('gableSolarPump', function (data) {
+        $('#gableSolarPump').val(data);
+    });
+    
+    socket.on('backBoilerPump', function (data) {
+        $('#backBoilerPump').val(data);
+    });
+    
+    socket.on('gableSolarPumpOverride', function (state) 
+    {
+        updateRadioButtons('gableSolarPumpOverride', state);
+    });
+    
+    socket.on('backBoilerPumpOverride', function (state) 
+    {
+        updateRadioButtons('backBoilerPumpOverride', state);
+    });
+    
+    function updateRadioButtons(id, state)
+    {
+        var sel = '#' + id + '-' + state;
+
+        $(sel).attr('checked', true).checkboxradio('refresh');
+    }
+    
+    function overrideSwitch(sel)
+    {
+        // send selection to server
+        socket.emit(sel.name, sel.value);
+    }
+    </script>
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Hot Water
+        </h3>
+    </div>
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            <label for="gableSolarTemp">
+                Gable Solar Temp
+            </label>
+                <input name="gableSolarTemp" id="gableSolarTemp" value="" type="text" readonly/>
+        </div>
+        <div data-role="fieldcontain">
+            <label for="mainTankLowerTemp">
+                Main Tank Lower Temp
+            </label>
+            <input name="mainTankLowerTemp" id="mainTankLowerTemp" value="" type="text" readonly/>
+        </div>
+        <div data-role="fieldcontain">
+            <label for="gableSolarPump">
+                Gable Solar Pump
+            </label>
+            <input name="gableSolarPump" id="gableSolarPump" value="" type="text" readonly/>
+        </div>
+        <div data-role="fieldcontain" >
+            <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
+                <legend>Override</legend>
+                <input type="radio" name="gableSolarPumpOverride" id="gableSolarPumpOverride-Auto" value="Auto" onchange="overrideSwitch(this);"/>
+                <label for="gableSolarPumpOverride-Auto">Auto</label>
+                <input type="radio" name="gableSolarPumpOverride" id="gableSolarPumpOverride-On" value="On" onchange="overrideSwitch(this);"/>
+                <label for="gableSolarPumpOverride-On">On</label>
+                <input type="radio" name="gableSolarPumpOverride" id="gableSolarPumpOverride-Off" value="Off" onchange="overrideSwitch(this);"/> 
+                <label for="gableSolarPumpOverride-Off">Off</label>
+            </fieldset>
+        </div>
+        <br/>
+        <div data-role="fieldcontain">
+            <label for="mainTankUpperTemp">
+                Main Tank Upper Temp
+            </label>
+            <input name="mainTankUpperTemp" id="mainTankUpperTemp" value="" type="text" readonly/>
+        </div>
+        <div data-role="fieldcontain">
+            <label for="backBoilerTemp">
+                Back Boiler Temp
+            </label>
+            <input name="backBoilerTemp" id="backBoilerTemp" value="" type="text" readonly/>
+        </div>
+        <div data-role="fieldcontain">
+            <label for="backBoilerPump">
+                Back Boiler Pump
+            </label>
+            <input name="backBoilerPump" id="backBoilerPump" value="" type="text" readonly/>
+        </div>
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
+                <legend>Override</legend>
+                <input type="radio" name="backBoilerPumpOverride" id="backBoilerPumpOverride-Auto" value="Auto" onchange="overrideSwitch(this);"/>
+                <label for="backBoilerPumpOverride-Auto">Auto</label>
+                <input type="radio" name="backBoilerPumpOverride" id="backBoilerPumpOverride-On" value="On" onchange="overrideSwitch(this);"/>
+                <label for="backBoilerPumpOverride-On">On</label>
+                <input type="radio" name="backBoilerPumpOverride" id="backBoilerPumpOverride-Off" value="Off" onchange="overrideSwitch(this);"/>
+                <label for="backBoilerPumpOverride-Off">Off</label>
+            </fieldset>
+        </div>
+    </div>
+</div>
+</body>
+</html>

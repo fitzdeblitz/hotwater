@@ -1,4 +1,3 @@
-__author__ = 'michael.lohan'
 import os
 import time
 

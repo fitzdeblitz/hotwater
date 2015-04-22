@@ -16,11 +16,11 @@ def hello():
 
 import time
 
-import Thermostats
-import Switches
+import thermostats
+import switches
 
-sensorMgr = Thermostats.SensorMgr()
-switchMgr = Switches.SwitchMgr()
+sensorMgr = thermostats.SensorMgr()
+switchMgr = switches.SwitchMgr()
 
 
 @app.route("/Gable/On")

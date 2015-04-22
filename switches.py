@@ -10,78 +10,78 @@ os.system('modprobe w1-therm')
 
 class Switch:
 
-    state = False
-    override = False
-    overrideState = False
+    _state = False
+    _override = False
+    _override_state = False
 
-    def __init__(self, name, pinNumber):
-        self.name = name
-        self.pinNumber = pinNumber
+    def __init__(self, name, pin_number):
+        self._name = name
+        self._pin_number = pin_number
 
     def turnOn(self):
-        if self.state==False :
+        if self._state==False :
             self.updateGPIO()
-            self.state = True
+            self._state = True
 
     def turnOff(self):
-        if self.state :
+        if self._state :
             self.updateGPIO()
-            self.state = False
+            self._state = False
 
     def overrideOn(self):
-        if self.override==False :
+        if self._override==False :
             self.updateGPIO()
-            self.override = True
+            self._override = True
 
     def overrideOff(self):
-        if self.override :
+        if self._override :
             self.updateGPIO()
-            self.override = False
+            self._override = False
 
     def overrideStateOn(self):
-        if self.overrideState==False :
+        if self._override_state==False :
             self.updateGPIO()
-            self.overrideState = True
+            self._override_state = True
 
-        self.overrideState = True
+        self._override_state = True
 
     def overrideStateOff(self):
-        if self.overrideState :
+        if self._override_state :
             self.updateGPIO()
-            self.overrideState = False
+            self._override_state = False
 
 
 
     def updateGPIO(self):
-        if self.override:
-            GPIO.output(self.pinNumber,self.overrideState)
+        if self._override:
+            GPIO.output(self._pin_number,self._override_state)
         else:
-            # todo add time check so the switch does change to quickly
-            GPIO.output(self.pinNumber,self.state)
+            # todo add time check so the _switch does change to quickly
+            GPIO.output(self._pin_number,self._state)
 
 
 class SwitchMgr:
 
     def __init__(self):
-        self.gablePumpSwitch = Switch('Gable Pump', 21)
-        self.backBoilerPumpSwitch = Switch('Back Boiler Pump', 20)
-        self.underFloorHeatingPumpSwitch = Switch('Under Floor Heating Pump', 19)
-        self.immersionShowerSwitch = Switch('Immersion Shower Heater', 18)
-        self.immersionBathSwitch = Switch('Immersion Shower Heater', 17)
+        self._gable_pump__switch = Switch('Gable Pump', 21)
+        self._back_boiler_pump__switch = Switch('Back Boiler Pump', 20)
+        self._under_floor_heating_pump__switch = Switch('Under Floor Heating Pump', 19)
+        self._immersion_shower_switch = Switch('Immersion Shower Heater', 18)
+        self._immersion_bath_switch = Switch('Immersion Shower Heater', 17)
 
     def turnGablePumpOn(self):
-        self.gablePumpSwitch.turnOn()
+        self._gable_pump__switch.turnOn()
 
     def turnGablePumpOff(self):
-       self.gablePumpSwitch.turnOff()
+       self._gable_pump__switch.turnOff()
 
     def turnGablePumpAlwaysOn(self):
-        self.gablePumpSwitch.overrideOn()
-        self.gablePumpSwitch.overrideStateOn()
+        self._gable_pump__switch.overrideOn()
+        self._gable_pump__switch.overrideStateOn()
 
     def turnGablePumpAlwaysOff(self):
-        self.gablePumpSwitch.overrideOn()
-        self.gablePumpSwitch.overrideOff()
+        self._gable_pump__switch.overrideOn()
+        self._gable_pump__switch.overrideOff()
 
     def setGablePumpAutomatic(self):
-        self.gablePumpSwitch.overrideOff()
+        self._gable_pump__switch.overrideOff()

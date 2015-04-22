@@ -1,4 +1,3 @@
-__author__ = 'michael.lohan'
 import os
 
 import RPi.GPIO as GPIO ## Import GPIO library

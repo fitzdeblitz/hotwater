@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-   <head>
-      <title>{{ title }}</title>
-   </head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-   <body>
-      <h1>Hello, World!</h1>
-      <h2>The date and time on the server is: {{ time }}</h2>
-   </body>
+        <title>{{ title }}</title>
+
+        <!-- jQuery and jQuery Mobile -->
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+        <!-- app -->
+        <script src="scripts/app.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="page1">
+            <div data-theme="a" data-role="header">
+                <h1>{{ title }}</h1>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="gableSolarPump">
+                    Gable Solar Pump
+                </label>
+                <input name="gableSolarPump" id="gableSolarPump" value="" type="text" readonly/>
+            </div>
+            <div data-role="content">
+                <div data-role="fieldcontain" >
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
+                        <legend>Control</legend>
+                        <input type="radio" name="gableSolarPumpOverride" id="gableSolarPumpOverride-Auto" value="Auto" onchange="app.overrideSwitch(this);"/>
+                        <label for="gableSolarPumpOverride-Auto">Auto</label>
+                        <input type="radio" name="gableSolarPumpOverride" id="gableSolarPumpOverride-On" value="On" onchange="app.overrideSwitch(this);"/>
+                        <label for="gableSolarPumpOverride-On">On</label>
+                        <input type="radio" name="gableSolarPumpOverride" id="gableSolarPumpOverride-Off" value="Off" onchange="app.overrideSwitch(this);"/>
+                        <label for="gableSolarPumpOverride-Off">Off</label>
+                    </fieldset>
+                </div>
+            </div>
+            <div data-theme="a" data-role="footer" data-position="fixed"/>
+                <h3>The date and time on the server is: {{ time }}</h3>
+            </div>
+        </div>
+    </body>
 </html>

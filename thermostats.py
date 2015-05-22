@@ -7,6 +7,12 @@ os.system('modprobe w1-therm')
 
 temp_sensor = '/sys/bus/w1/devices/28-0414609ea2ff/w1_slave'
 
+temp_sensor_gable_or_roof = '/sys/bus/w1/devices/28-000005e4b7ba/w1_slave'
+temp_sensor_gable_or_roof2 = '/sys/bus/w1/devices/28-000005e77594/w1_slave'
+
+temp_sensor_tbottom = '/sys/bus/w1/devices/28-0414608267ff/w1_slave'
+temp_sensor_ttop  = '/sys/bus/w1/devices/28-041460ba02ff/w1_slave'
+
 class TempSensor:
 
     def __init__(self, name, device_name):
@@ -36,10 +42,11 @@ class TempSensor:
 
 class SensorMgr:
     def __init__(self):
-        self._gable = TempSensor('Gable Solar Panel','28-0414609ea2ff')
-        self._tank_lower =  TempSensor('Tank Lower','28-0414609ea2ff')
-        self._back_boiler = TempSensor('Back Boiler','28-0414609ea2ff')
-        self._tank_upper = TempSensor('Tank Upper','28-0414609ea2ff')
+        self._roofGreenHouse = TempSensor('Gable Solar Panel','28-000005e4b7ba')
+        self._gable = TempSensor('Roof Green House','28-000005e77594')
+        self._tank_lower =  TempSensor('Tank Lower','28-0414608267ff')
+        self._tank_upper = TempSensor('Tank Upper','28-041460ba02ff')
+        self._back_boiler = TempSensor('Back Boiler','28-0414609848ff')
 
     def isGableHotterThanTank(self):
         return self._gable.readTemp() > self._tank_lower.readTemp()

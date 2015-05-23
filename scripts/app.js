@@ -16,7 +16,7 @@ HotWater.App = function ()
 
     self.overrideSwitch = function (selector)
     {
-        $.getJSON("http://localhost:8080/Gable/" + selector.value, function(data) { })
+        $.getJSON("/Gable/" + selector.value, function(data) { })
     }
 }
 

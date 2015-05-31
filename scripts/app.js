@@ -1,22 +1,22 @@
 
-"use strict";
+'use strict';
 
-// namespace
-var HotWater = HotWater || {};
+var app = angular.module('HotWater', []);
 
-var app;
-$(document).ready(function ()
-{
-    app = new HotWater.App();
+// configure angular to avoid brace conflicts with Jinja2
+app.config(function($interpolateProvider) {
+  $interpolateProvider.startSymbol('{[');
+  $interpolateProvider.endSymbol(']}');
 });
 
-HotWater.App = function ()
-{
-    var self = this;
+app.controller('ThermostatsController', ['$scope', '$http', '$log', ThermostatsController]);
 
-    self.overrideSwitch = function (selector)
-    {
-        $.getJSON("/Gable/" + selector.value, function(data) { })
-    }
+app.overrideSwitch = function (selector) {
+  $.getJSON("/Gable/" + selector.value, function (data) { })
 }
 
+function ThermostatsController($scope, $http, $log) {
+  $http.get('/thermostats')
+    .success(function(data) { $scope.thermostats = data.thermostats; })
+    .error(function(data) { $log.log('eek!'); });
+}

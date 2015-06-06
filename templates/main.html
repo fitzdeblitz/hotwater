@@ -22,15 +22,17 @@
             <div data-theme="a" data-role="header">
                 <h1>{{ title }}</h1>
             </div>
-            <div ng-controller="ThermostatsController">
-                <div data-role="fieldcontain" ng-repeat="thermostat in thermostats">
-                    <label for="thermostat{[$index+1]}">
-                        {[thermostat.sensor]}
-                    </label>
-                    <input name="thermostat{[$index+1]}" id="thermostat{[$index+1]}" value="{[thermostat.value]}" type="text" readonly/>
+            <div data-role="content">
+                <div ng-controller="ThermostatsController">
+                    <div data-role="fieldcontain" ng-repeat="thermostat in thermostats">
+                        <label for="thermostat{[$index+1]}">
+                            {[thermostat.sensor]}
+                        </label>
+                        <input name="thermostat{[$index+1]}" id="thermostat{[$index+1]}" value="{[thermostat.value]}" type="text" readonly/>
+                    </div>
                 </div>
             </div>
-            <div data-role="content">
+            <div data-role="content" data-theme="b">
                 <div data-role="fieldcontain" >
                     <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
                         <legend>Gable Control</legend>

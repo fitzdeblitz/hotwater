@@ -1,15 +1,16 @@
+import datetime
+import time
 
 from flask import Flask, render_template, send_from_directory, jsonify
 
-import datetime
-import time
-import thermostats
-import switches
+from sensormgr import SensorMgr
+from switchmgr import SwitchMgr
+
 
 app = Flask(__name__, static_url_path="")
 
-sensorMgr = thermostats.SensorMgr()
-switchMgr = switches.SwitchMgr()
+sensorMgr = SensorMgr()
+switchMgr = SwitchMgr()
 
 @app.route("/")
 def hello():

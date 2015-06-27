@@ -9,7 +9,6 @@ os.system('modprobe w1-therm')
 
 
 class Switch:
-
     _state = False
     _override = False
     _override_state = False
@@ -50,8 +49,6 @@ class Switch:
             self.updateGPIO()
             self._override_state = False
 
-
-
     def updateGPIO(self):
         if self._override:
             GPIO.output(self._pin_number,self._override_state)
@@ -60,28 +57,3 @@ class Switch:
             GPIO.output(self._pin_number,self._state)
 
 
-class SwitchMgr:
-
-    def __init__(self):
-        self._gable_pump__switch = Switch('Gable Pump', 21)
-        self._back_boiler_pump__switch = Switch('Back Boiler Pump', 20)
-        self._under_floor_heating_pump__switch = Switch('Under Floor Heating Pump', 19)
-        self._immersion_shower_switch = Switch('Immersion Shower Heater', 18)
-        self._immersion_bath_switch = Switch('Immersion Shower Heater', 17)
-
-    def turnGablePumpOn(self):
-        self._gable_pump__switch.turnOn()
-
-    def turnGablePumpOff(self):
-       self._gable_pump__switch.turnOff()
-
-    def turnGablePumpAlwaysOn(self):
-        self._gable_pump__switch.overrideOn()
-        self._gable_pump__switch.overrideStateOn()
-
-    def turnGablePumpAlwaysOff(self):
-        self._gable_pump__switch.overrideOn()
-        self._gable_pump__switch.overrideOff()
-
-    def setGablePumpAutomatic(self):
-        self._gable_pump__switch.overrideOff()

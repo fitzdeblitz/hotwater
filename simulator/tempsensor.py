@@ -10,6 +10,6 @@ class TempSensor:
     def name(self):
         return self._name
 
-    def readTemp(self):
+    def read_temp(self):
         return 20
 

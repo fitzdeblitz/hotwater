@@ -6,25 +6,25 @@ except ImportError:
 
 class SwitchMgr:
     def __init__(self):
-        self._gable_pump__switch = Switch('Gable Pump', 21)
-        self._back_boiler_pump__switch = Switch('Back Boiler Pump', 20)
-        self._under_floor_heating_pump__switch = Switch('Under Floor Heating Pump', 19)
+        self._gable_pump_switch = Switch('Gable Pump', 21)
+        self._back_boiler_pump_switch = Switch('Back Boiler Pump', 20)
+        self._under_floor_heating_pump_switch = Switch('Under Floor Heating Pump', 19)
         self._immersion_shower_switch = Switch('Immersion Shower Heater', 18)
         self._immersion_bath_switch = Switch('Immersion Shower Heater', 17)
 
-    def turnGablePumpOn(self):
-        self._gable_pump__switch.turnOn()
+    def turn_gable_pump_on(self):
+        self._gable_pump_switch.turn_on()
 
-    def turnGablePumpOff(self):
-       self._gable_pump__switch.turnOff()
+    def turn_gable_pump_off(self):
+        self._gable_pump_switch.turn_off()
 
-    def turnGablePumpAlwaysOn(self):
-        self._gable_pump__switch.overrideOn()
-        self._gable_pump__switch.overrideStateOn()
+    def turn_gable_pump_always_on(self):
+        self._gable_pump_switch.override_on()
+        self._gable_pump_switch.override_state_on()
 
-    def turnGablePumpAlwaysOff(self):
-        self._gable_pump__switch.overrideOn()
-        self._gable_pump__switch.overrideOff()
+    def turn_gable_pump_always_off(self):
+        self._gable_pump_switch.override_on()
+        self._gable_pump_switch.override_off()
 
-    def setGablePumpAutomatic(self):
-        self._gable_pump__switch.overrideOff()
+    def set_gable_pump_automatic(self):
+        self._gable_pump_switch.override_off()

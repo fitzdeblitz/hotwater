@@ -6,22 +6,20 @@ from flask import Flask, render_template, send_from_directory, jsonify
 from sensormgr import SensorMgr
 from switchmgr import SwitchMgr
 
-
 app = Flask(__name__, static_url_path="")
 
-sensorMgr = SensorMgr()
-switchMgr = SwitchMgr()
+sensormgr = SensorMgr()
+switchmgr = SwitchMgr()
 
 @app.route("/")
 def hello():
     print('Hot Water')
     now = datetime.datetime.now()
-    timeString = now.strftime("%Y-%m-%d %H:%M")
-    templateData = {
-      'title' : 'Hot Water',
-      'time': timeString
-      }
-    return render_template('main.html', **templateData)
+    template_data = {
+        'title': 'Hot Water',
+        'time': now.strftime("%Y-%m-%d %H:%M")
+    }
+    return render_template('main.html', **template_data)
 
 @app.route('/scripts/<path:path>')
 def send_js(path):
@@ -30,31 +28,31 @@ def send_js(path):
 # GET shouldn't act like this at all, but we keep as is for now
 @app.route("/Gable/On")
 def turnGablePumpAlwaysOn():
-    switchMgr.turnGablePumpAlwaysOn()
+    switchmgr.turn_gable_pump_always_on()
     return jsonify(response="Success!")
 
 @app.route("/Gable/Off")
 def turnGablePumpAlwaysOff():
-    switchMgr.turnGablePumpAlwaysOff()
+    switchmgr.turn_gable_pump_always_off()
     return jsonify(response="Success!")
 
 @app.route("/Gable/Auto")
 def setGablePumpAutomatic():
-    switchMgr.setGablePumpAutomatic()
+    switchmgr.set_gable_pump_automatic()
     return jsonify(response="Success!")
 
-@app.route("/thermostats")
-def get_thermostats():
-    values = sensorMgr.get_thermostats()
-    return jsonify(thermostats=values)
+@app.route("/tempsensors")
+def get_tempsensors():
+    values = sensormgr.get_tempsensors()
+    return jsonify(tempsensors=values)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
 
 while True:
-    if sensorMgr.isGableHotterThanTank():
-        switchMgr.turnGablePumpOn()
+    if sensormgr.is_gable_hotter_than_tank():
+        switchmgr.turn_gable_pump_on()
     else:
-        switchMgr.turnGablePumpOff()
+        switchmgr.turn_gable_pump_off()
 
     time.sleep(1)

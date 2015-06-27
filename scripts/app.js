@@ -9,19 +9,19 @@ app.config(function($interpolateProvider) {
   $interpolateProvider.endSymbol(']}');
 });
 
-app.controller('ThermostatsController', ['$scope', '$http', '$log', ThermostatsController]);
+app.controller('TempSensorsController', ['$scope', '$http', '$log', TempSensorsController]);
 
 app.overrideSwitch = function (selector) {
   $.getJSON("/Gable/" + selector.value, function (data) { })
 }
 
-function ThermostatsController($scope, $http, $log) {
+function TempSensorsController($scope, $http, $log) {
 
-  $scope.get_thermostats = function() {
-    $http.get('/thermostats')
-      .success(function(data) { $scope.thermostats = data.thermostats; })
+  $scope.get_tempsensors = function() {
+    $http.get('/tempsensors')
+      .success(function(data) { $scope.tempsensors = data.tempsensors; })
       .error(function(data) { $log.log('eek!'); });
   }
 
-  $scope.get_thermostats();
+  $scope.get_tempsensors();
 }

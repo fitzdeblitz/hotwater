@@ -10,28 +10,26 @@ class Switch:
         self._name = name
         self._pin_number = pin_number
 
-    def turnOn(self):
-        if self._state==False :
+    def turn_on(self):
+        if not self._state:
             self._state = True
 
-    def turnOff(self):
-        if self._state :
+    def turn_off(self):
+        if self._state:
             self._state = False
 
-    def overrideOn(self):
-        if self._override==False :
+    def override_on(self):
+        if not self._override:
             self._override = True
 
-    def overrideOff(self):
-        if self._override :
+    def override_off(self):
+        if self._override:
             self._override = False
 
-    def overrideStateOn(self):
-        if self._override_state==False :
+    def override_state_on(self):
+        if not self._override_state:
             self._override_state = True
 
-        self._override_state = True
-
-    def overrideStateOff(self):
-        if self._override_state :
+    def override_state_off(self):
+        if self._override_state:
             self._override_state = False

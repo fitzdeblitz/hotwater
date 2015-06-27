@@ -17,43 +17,39 @@ class Switch:
         self._name = name
         self._pin_number = pin_number
 
-    def turnOn(self):
-        if self._state==False :
-            self.updateGPIO()
+    def turn_on(self):
+        if not self._state:
+            self._update_gpio()
             self._state = True
 
-    def turnOff(self):
-        if self._state :
-            self.updateGPIO()
+    def turn_off(self):
+        if self._state:
+            self._update_gpio()
             self._state = False
 
-    def overrideOn(self):
-        if self._override==False :
-            self.updateGPIO()
+    def override_on(self):
+        if not self._override:
+            self._update_gpio()
             self._override = True
 
-    def overrideOff(self):
-        if self._override :
-            self.updateGPIO()
+    def override_off(self):
+        if self._override:
+            self._update_gpio()
             self._override = False
 
-    def overrideStateOn(self):
-        if self._override_state==False :
-            self.updateGPIO()
+    def override_state_on(self):
+        if not self._override_state:
+            self._update_gpio()
             self._override_state = True
 
-        self._override_state = True
-
-    def overrideStateOff(self):
-        if self._override_state :
-            self.updateGPIO()
+    def override_state_off(self):
+        if self._override_state:
+            self._update_gpio()
             self._override_state = False
 
-    def updateGPIO(self):
+    def _update_gpio(self):
         if self._override:
-            GPIO.output(self._pin_number,self._override_state)
+            GPIO.output(self._pin_number, self._override_state)
         else:
             # todo add time check so the _switch does change to quickly
-            GPIO.output(self._pin_number,self._state)
-
-
+            GPIO.output(self._pin_number, self._state)

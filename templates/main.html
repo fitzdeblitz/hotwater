@@ -23,12 +23,12 @@
                 <h1>{{ title }}</h1>
             </div>
             <div data-role="content">
-                <div ng-controller="ThermostatsController">
-                    <div data-role="fieldcontain" ng-repeat="thermostat in thermostats">
-                        <label for="thermostat{[$index+1]}">
-                            {[thermostat.sensor]}
+                <div ng-controller="TempSensorsController">
+                    <div data-role="fieldcontain" ng-repeat="tempsensor in tempsensors">
+                        <label for="tempsensor{[$index+1]}">
+                            {[tempsensor.name]}
                         </label>
-                        <input name="thermostat{[$index+1]}" id="thermostat{[$index+1]}" value="{[thermostat.value]}" type="text" readonly/>
+                        <input name="tempsensor{[$index+1]}" id="tempsensor{[$index+1]}" value="{[tempsensor.value]}" type="text" readonly/>
                     </div>
                 </div>
             </div>

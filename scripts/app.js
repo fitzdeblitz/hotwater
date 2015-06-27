@@ -16,7 +16,12 @@ app.overrideSwitch = function (selector) {
 }
 
 function ThermostatsController($scope, $http, $log) {
-  $http.get('/thermostats')
-    .success(function(data) { $scope.thermostats = data.thermostats; })
-    .error(function(data) { $log.log('eek!'); });
+
+  $scope.get_thermostats = function() {
+    $http.get('/thermostats')
+      .success(function(data) { $scope.thermostats = data.thermostats; })
+      .error(function(data) { $log.log('eek!'); });
+  }
+
+  $scope.get_thermostats();
 }

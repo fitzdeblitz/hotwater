@@ -6,8 +6,8 @@ except ImportError:
 
 class SensorMgr:
     def __init__(self):
-        self._roof_green_house = TempSensor('Gable Solar Panel', '28-000005e4b7ba')
-        self._gable = TempSensor('Roof Green House', '28-000005e77594')
+        self._roof_green_house = TempSensor('Roof Green House', '28-000005e4b7ba')
+        self._gable = TempSensor('Gable Solar Panel', '28-000005e77594')
         self._tank_lower = TempSensor('Tank Lower', '28-0414608267ff')
         self._tank_upper = TempSensor('Tank Upper', '28-041460ba02ff')
         self._back_boiler = TempSensor('Back Boiler', '28-0414609848ff')

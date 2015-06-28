@@ -5,6 +5,7 @@ from flask import Flask, render_template, send_from_directory, jsonify
 
 from sensormgr import SensorMgr
 from switchmgr import SwitchMgr
+from controller import ControllerThread
 
 app = Flask(__name__, static_url_path="")
 
@@ -47,12 +48,6 @@ def get_tempsensors():
     return jsonify(tempsensors=values)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True)
-
-while True:
-    if sensormgr.is_gable_hotter_than_tank():
-        switchmgr.turn_gable_pump_on()
-    else:
-        switchmgr.turn_gable_pump_off()
-
-    time.sleep(1)
+    controller = ControllerThread(sensormgr, switchmgr)
+    controller.start()
+    app.run(host='0.0.0.0', port=8080, debug=True)

@@ -19,33 +19,33 @@ class Switch:
 
     def turn_on(self):
         if not self._state:
-            self._update_gpio()
             self._state = True
+            self._update_gpio()
 
     def turn_off(self):
         if self._state:
-            self._update_gpio()
             self._state = False
+            self._update_gpio()
 
     def override_on(self):
         if not self._override:
-            self._update_gpio()
             self._override = True
+            self._update_gpio()
 
     def override_off(self):
         if self._override:
-            self._update_gpio()
             self._override = False
+            self._update_gpio()
 
     def override_state_on(self):
         if not self._override_state:
-            self._update_gpio()
             self._override_state = True
+            self._update_gpio()
 
     def override_state_off(self):
         if self._override_state:
-            self._update_gpio()
             self._override_state = False
+            self._update_gpio()
 
     def _update_gpio(self):
         if self._override:

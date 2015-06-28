@@ -24,7 +24,7 @@ class SwitchMgr:
 
     def turn_gable_pump_always_off(self):
         self._gable_pump_switch.override_on()
-        self._gable_pump_switch.override_off()
+        self._gable_pump_switch.override_state_off()
 
     def set_gable_pump_automatic(self):
         self._gable_pump_switch.override_off()

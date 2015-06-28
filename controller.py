@@ -13,7 +13,7 @@ class ControllerThread(Thread):
         while True:
             if self.sensormgr.is_gable_hotter_than_tank():
                 self.switchmgr.turn_gable_pump_on()
-            else:
+            elif self.sensormgr.is_tank_hotter_than_gable():
                 self.switchmgr.turn_gable_pump_off()
 
             time.sleep(5)
